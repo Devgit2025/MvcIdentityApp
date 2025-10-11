@@ -5,7 +5,10 @@
 <h2>สมัครสมาชิก</h2>
 <form asp-action="Register" method="post">
     <input name="fullName" placeholder="ชื่อเต็ม" class="form-control" />
+    <span class="text-danger mb-3">ชื่อห้ามซ้ำ</span>
+
     <input name="email" placeholder="อีเมล" class="form-control" />
+
     <input name="username" placeholder="ชื่อผู้ใช้" class="form-control" />
     <input name="password" type="password" placeholder="รหัสผ่าน" class="form-control" />
     <span class="text-danger mb-3">รหัสผ่านต้องมีตัวเลข ตัวอักษรพิมพ์ใหญ่และพิมพ์เล็กรวมถึงสัญลักษณ์พิเศษ</span>
