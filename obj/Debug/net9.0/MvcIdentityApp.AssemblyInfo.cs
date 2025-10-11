@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MvcIdentityApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfb4ce14df76d1786d6d51f3664a94581730c0b6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f73f5587f46d342222bae8653b59a06e1c2e2cff")]
 [assembly: System.Reflection.AssemblyProductAttribute("MvcIdentityApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MvcIdentityApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

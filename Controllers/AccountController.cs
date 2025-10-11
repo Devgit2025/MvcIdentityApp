@@ -49,7 +49,7 @@ namespace MvcIdentityApp.Controllers
                 await _userManager.AddToRoleAsync(user, "User");
 
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             foreach (var error in result.Errors)
@@ -70,7 +70,7 @@ namespace MvcIdentityApp.Controllers
             if (result.Succeeded)
                 return RedirectToAction("Index", "Home");
 
-            ViewBag.Error = "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
+            ViewBag.Error = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
             return View();
         }
 

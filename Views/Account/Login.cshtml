@@ -1,7 +1,11 @@
-﻿
-@{
-    ViewData["Title"] = "Login";
+﻿@{
+    ViewBag.Title = "เข้าสู่ระบบ";
 }
 
-<h1>Login</h1>
-
+<h2>เข้าสู่ระบบ</h2>
+<form asp-action="Login" method="post">
+    <input name="username" placeholder="ชื่อผู้ใช้" class="form-control" />
+    <input name="password" type="password" placeholder="รหัสผ่าน" class="form-control" />
+    <button type="submit" class="btn btn-success mt-2">เข้าสู่ระบบ</button>
+</form>
+<p style="color:red">@ViewBag.Error</p>
