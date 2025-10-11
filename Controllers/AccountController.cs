@@ -96,6 +96,7 @@ namespace MvcIdentityApp.Controllers
         // 🟩 LOGOUT
         public async Task<IActionResult> Logout()
         {
+            HttpContext.Session.Clear();
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
