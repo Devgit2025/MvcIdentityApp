@@ -68,11 +68,30 @@ namespace MvcIdentityApp.Controllers
             var result = await _signInManager.PasswordSignInAsync(username, password, false, false);
 
             if (result.Succeeded)
-                return RedirectToAction("Index", "Home");
+            {
+                //HttpContext.Session.SetString("Username",username);
+                HttpContext.Session.SetString("UserName", username);
+                return RedirectToAction("Dashboard");
+            }
 
             ViewBag.Error = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
             return View();
         }
+
+        public IActionResult Dashboard()
+        {
+
+            var username = HttpContext.Session.GetString("UserName");
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login");
+
+            }
+            ViewBag.Username = username;
+            return View();
+        }
+
 
         // 🟩 LOGOUT
         public async Task<IActionResult> Logout()
