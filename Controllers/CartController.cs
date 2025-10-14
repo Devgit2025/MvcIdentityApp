@@ -60,6 +60,15 @@ namespace MvcIdentityApp.Controllers
         // แสดงตะกร้าสินค้า
         public IActionResult Cart()
         {
+            var username = HttpContext.Session.GetString("UserName");
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
+            ViewBag.Username = username;
+
             var cart = GetCart();
             return View(cart);
         }
