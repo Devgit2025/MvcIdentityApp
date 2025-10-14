@@ -11,7 +11,7 @@ namespace MvcIdentityApp.Models
         public string Pro_Name { get; set; }
 
         [Required]
-        public int Pro_Price { get; set; }
+        public decimal Pro_Price { get; set; }
 
         [Required]
         public string Pro_Detail { get; set; }

@@ -71,7 +71,7 @@ namespace MvcIdentityApp.Controllers
             {
                 //HttpContext.Session.SetString("Username",username);
                 HttpContext.Session.SetString("UserName", username);
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Index","Cart");
             }
 
             ViewBag.Error = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";

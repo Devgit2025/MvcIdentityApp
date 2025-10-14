@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CartItem>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart</h1>
+
+<h2>🛒 ตะกร้าสินค้า</h2>
+
+@if (!Model.Any())
+{
+    <p>ยังไม่มีสินค้าในตะกร้า</p>
+}
+else
+{
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>สินค้า</th>
+            <th>ราคา</th>
+            <th>จำนวน</th>
+            <th>รวม</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Cart_Name</td>
+                <td>@item.Cart_Price.ToString("N2")</td>
+                <td>@item.Cart_Quantity</td>
+                <td>@item.Cart_Total.ToString("N2")</td>
+                <td><a href="/Cart/RemoveItem/@item.Cart_Id" class="btn btn-danger" onclick="return confirm('คุณต้องการลบ @item.Cart_Name หรือไม่')">ลบ</a></td>
+            </tr>
+        }
+    </table>
+
+    <p style="margin-top:10px">
+        <strong>ยอดรวมทั้งหมด:</strong>
+        @Model.Sum(i => i.Cart_Total).ToString("N2") บาท
+    </p>
+
+    <a href="/Cart/ClearCart">ล้างตะกร้า</a>
+}
+<br />
+<br />
+<a href="/Cart/Index">⬅️ กลับไปเลือกสินค้า</a>
+
+
