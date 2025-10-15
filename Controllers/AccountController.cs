@@ -65,15 +65,17 @@ namespace MvcIdentityApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
-            var result = await _signInManager.PasswordSignInAsync(username, password, false, false);
-
-            if (result.Succeeded)
+            if (username != null && password != null)
             {
-                //HttpContext.Session.SetString("Username",username);
-                HttpContext.Session.SetString("UserName", username);
-                return RedirectToAction("Index","Cart");
+                var result = await _signInManager.PasswordSignInAsync(username, password, false, false);
+                if (result.Succeeded)
+                {
+                    HttpContext.Session.SetString("UserName", username);
+                    return RedirectToAction("Index", "Cart");
+                }
             }
 
+            
             ViewBag.Error = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
             return View();
         }

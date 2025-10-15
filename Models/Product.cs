@@ -17,7 +17,7 @@ namespace MvcIdentityApp.Models
         public string Pro_Detail { get; set; }
 
         [Required]
-        public String Pro_Img { get; set; }
+        public String Pro_Img { get; set; } // เก็บ path ของรูปภาพ
 
         [Required]
         [Range(0, 1000, ErrorMessage = "กรุณาป้อนสินค้าในคลัง 0-1000")]
