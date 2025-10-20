@@ -12,18 +12,13 @@ namespace MvcIdentityApp.Controllers
     public class CartController : Controller
     {
 
-        /*private readonly ApplicationDbContext _db;
-        public CartController(ApplicationDbContext db)
-        {
-            _db = db;
-        }*/
-        /*private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
 
         public CartController(ApplicationDbContext db)
         {
             _db = db; // ✅ inject จาก DI container
         }
-        */
+        
 
         //private readonly ApplicationDbContext db = new ApplicationDbContext();
 
@@ -37,31 +32,6 @@ namespace MvcIdentityApp.Controllers
         };*/
 
         // แสดงสินค้าทั้งหมด
-        /*public IActionResult Index()
-        {
-            var username = HttpContext.Session.GetString("UserName");
-
-            if (string.IsNullOrEmpty(username))
-            {
-                return RedirectToAction("Login", "Account");
-
-            }
-            ViewBag.Username = username;
-            //var products_toobj = _db.products;
-            var products = _db.products; // ✅ ต้องมี using System.Linq;
-
-
-            return View(products);
-        }*/
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationDbContext _context;
-
-        public CartController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
-        {
-            _userManager = userManager;
-            _context = context;
-        }
-
         public IActionResult Index()
         {
             var username = HttpContext.Session.GetString("UserName");
@@ -74,14 +44,14 @@ namespace MvcIdentityApp.Controllers
             ViewBag.Username = username;
             // ดึงข้อมูลผู้ใช้ทั้งหมด
             //var users = _context.Users.ToList();  // ✅ จาก IdentityDbContext
-            var products = _context.Products.ToList();
+            var products = _db.Products.ToList();
             return View(products);
         }
 
         // เพิ่มสินค้าเข้าตะกร้า
         public IActionResult AddToCart(int id)
         {
-            /*var product = _db.products.FirstOrDefault(p => p.Pro_Id == id);
+            var product = _db.Products.FirstOrDefault(p => p.Pro_Id == id);
             if (product == null) return NotFound();
 
             var cart = GetCart();
@@ -98,7 +68,7 @@ namespace MvcIdentityApp.Controllers
                     Cart_Quantity = 1
                 });
 
-            SaveCart(cart);*/
+            SaveCart(cart);
 
             return RedirectToAction("Cart");
         }
