@@ -51,6 +51,7 @@ namespace MvcIdentityApp.Controllers
         // เพิ่มสินค้าเข้าตะกร้า
         public IActionResult AddToCart(int id)
         {
+            
             var product = _db.Products.FirstOrDefault(p => p.Pro_Id == id);
             if (product == null) return NotFound();
 
@@ -79,11 +80,11 @@ namespace MvcIdentityApp.Controllers
         {
             var username = HttpContext.Session.GetString("UserName");
 
-            if (string.IsNullOrEmpty(username))
+            /*if (string.IsNullOrEmpty(username))
             {
                 return RedirectToAction("Login", "Account");
 
-            }
+            }*/
             ViewBag.Username = username;
 
             var cart = GetCart();
