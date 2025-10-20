@@ -247,8 +247,8 @@ namespace MvcIdentityApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Pro_Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Pro_Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Pro_Stock")
                         .HasColumnType("int");

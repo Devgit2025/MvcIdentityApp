@@ -12,8 +12,8 @@ using MvcIdentityApp.Data;
 namespace MvcIdentityApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251011060053_InitIdentity")]
-    partial class InitIdentity
+    [Migration("20251020093727_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -250,8 +250,8 @@ namespace MvcIdentityApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Pro_Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Pro_Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Pro_Stock")
                         .HasColumnType("int");

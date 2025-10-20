@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MvcIdentityApp.Migrations
 {
     /// <inheritdoc />
-    public partial class InitIdentity : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,7 +59,7 @@ namespace MvcIdentityApp.Migrations
                     Pro_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Pro_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Pro_Price = table.Column<int>(type: "int", nullable: false),
+                    Pro_Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Pro_Detail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Pro_Img = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Pro_Stock = table.Column<int>(type: "int", nullable: false)

@@ -1,21 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using MvcIdentityApp.Data;
 using MvcIdentityApp.Models;
-using Newtonsoft.Json; // ต้องใช้ NuGet: Microsoft.AspNetCore.Session + Newtonsoft.Json
+using Newtonsoft.Json;
+using System.Diagnostics; // ต้องใช้ NuGet: Microsoft.AspNetCore.Session + Newtonsoft.Json
+using System.Linq;
 
 
 namespace MvcIdentityApp.Controllers
 {
     public class CartController : Controller
     {
+
+        /*private readonly ApplicationDbContext _db;
+        public CartController(ApplicationDbContext db)
+        {
+            _db = db;
+        }*/
+        /*private readonly ApplicationDbContext _db;
+
+        public CartController(ApplicationDbContext db)
+        {
+            _db = db; // ✅ inject จาก DI container
+        }
+        */
+
+        //private readonly ApplicationDbContext db = new ApplicationDbContext();
+
+
         // 🔹 จำลองสินค้า (ในโปรเจกต์จริงจะดึงจากฐานข้อมูล)
-        private List<Product> products = new List<Product>()
+        /*private List<Product> products = new List<Product>()
         {
         new Product{ Pro_Id = 1, Pro_Name = "เสื้อยืด", Pro_Price = 250 },
         new Product{ Pro_Id = 2, Pro_Name = "กางเกงยีนส์", Pro_Price = 750 },
         new Product{ Pro_Id = 3, Pro_Name = "รองเท้า", Pro_Price = 1200 }
-        };
+        };*/
 
         // แสดงสินค้าทั้งหมด
+        /*public IActionResult Index()
+        {
+            var username = HttpContext.Session.GetString("UserName");
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
+            ViewBag.Username = username;
+            //var products_toobj = _db.products;
+            var products = _db.products; // ✅ ต้องมี using System.Linq;
+
+
+            return View(products);
+        }*/
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
+
+        public CartController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        {
+            _userManager = userManager;
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             var username = HttpContext.Session.GetString("UserName");
@@ -26,15 +72,16 @@ namespace MvcIdentityApp.Controllers
 
             }
             ViewBag.Username = username;
-            //return View();
-
+            // ดึงข้อมูลผู้ใช้ทั้งหมด
+            //var users = _context.Users.ToList();  // ✅ จาก IdentityDbContext
+            var products = _context.Products.ToList();
             return View(products);
         }
 
         // เพิ่มสินค้าเข้าตะกร้า
         public IActionResult AddToCart(int id)
         {
-            var product = products.FirstOrDefault(p => p.Pro_Id == id);
+            /*var product = _db.products.FirstOrDefault(p => p.Pro_Id == id);
             if (product == null) return NotFound();
 
             var cart = GetCart();
@@ -51,7 +98,7 @@ namespace MvcIdentityApp.Controllers
                     Cart_Quantity = 1
                 });
 
-            SaveCart(cart);
+            SaveCart(cart);*/
 
             return RedirectToAction("Cart");
         }

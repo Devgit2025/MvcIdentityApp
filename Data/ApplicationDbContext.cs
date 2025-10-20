@@ -6,11 +6,15 @@ namespace MvcIdentityApp.Data
 {
     public class ApplicationDbContext:IdentityDbContext<ApplicationUser>
     {
+        internal object products;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
         {
         }
 
-        DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
+
+        
     }
 }
