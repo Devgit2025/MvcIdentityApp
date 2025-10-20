@@ -10,18 +10,37 @@
 <div class="row">
     @foreach (var product in Model)
     {
-        <div class="col-sm-6 col-md-3 mb-3">
-            <div class="card">
-                <img src="https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_1280.jpg" class="card-img-top" height="200">
-                <div class="card-body">
-                    <h5 class="card-title">@product.Pro_Name</h5>
-                    <p class="card-subtitle text-muted">@product.Pro_Detail</p>
-                    <p class="card-text text-success h5">@product.Pro_Price.ToString("N2") บาท</p>
-                    <a class="btn btn-success w-100" href="/Cart/AddToCart/@product.Pro_Id">Add to cart</a>
+        @if(product.Pro_Stock != 0)
+        {
+            <div class="col-sm-6 col-md-3 mb-3">
+                <div class="card">
+                    <img src="https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_1280.jpg" class="card-img-top" height="200">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Pro_Name</h5>
+                        <p class="card-subtitle text-muted">@product.Pro_Detail</p>
+                        <p class="card-text text-success h5">@product.Pro_Price.ToString("N2") บาท</p>
+                        <a class="btn btn-success w-100" href="/Cart/AddToCart/@product.Pro_Id">Add to cart</a>
 
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="col-sm-6 col-md-3 mb-3">
+                <div class="card">
+                    <img src="https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_1280.jpg" class="card-img-top" height="200">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Pro_Name</h5>
+                        <p class="card-subtitle text-muted">@product.Pro_Detail</p>
+                        <p class="card-text text-success h5">@product.Pro_Price.ToString("N2") บาท</p>
+                        <a class="btn btn-danger w-100">Out Stock</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+
     }
     
     

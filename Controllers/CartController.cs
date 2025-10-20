@@ -36,11 +36,11 @@ namespace MvcIdentityApp.Controllers
         {
             var username = HttpContext.Session.GetString("UserName");
 
-            if (string.IsNullOrEmpty(username))
+            /*if (string.IsNullOrEmpty(username))
             {
                 return RedirectToAction("Login", "Account");
 
-            }
+            }*/
             ViewBag.Username = username;
             // ดึงข้อมูลผู้ใช้ทั้งหมด
             //var users = _context.Users.ToList();  // ✅ จาก IdentityDbContext
