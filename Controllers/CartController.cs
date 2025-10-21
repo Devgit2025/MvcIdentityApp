@@ -131,5 +131,27 @@ namespace MvcIdentityApp.Controllers
             HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
         }
 
+        public IActionResult OrderBuy()
+        {
+            var username = HttpContext.Session.GetString("UserName");
+            var fullname = HttpContext.Session.GetString("Fullname");
+            var email = HttpContext.Session.GetString("Email");
+            var phone = HttpContext.Session.GetString("Phone");
+
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
+            ViewBag.Username = username;
+            ViewBag.Fullname = fullname;
+            ViewBag.Email = email;
+            ViewBag.Phone = phone;
+
+            var cart = GetCart();
+            return View(cart);
+        }
+
     }
 }

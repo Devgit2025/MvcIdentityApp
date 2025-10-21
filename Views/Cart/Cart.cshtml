@@ -14,7 +14,7 @@
 }
 else
 {
-    <table border="1" cellpadding="8">
+    <table class="table table-striped table-hover">
         <tr>
             <th>สินค้า</th>
             <th>ราคา</th>
@@ -34,15 +34,18 @@ else
         }
     </table>
 
-    <p style="margin-top:10px">
+    <h5 style="margin-top:10px" class="text-end">
         <strong>ยอดรวมทั้งหมด:</strong>
         @Model.Sum(i => i.Cart_Total).ToString("N2") บาท
-    </p>
+    </h5>
+    
+    <div class="text-end">
+        <a href="/Cart/OrderBuy" class="btn btn-success mt-3">สั่งซื้อ</a>
+        <a href="/Cart/ClearCart" class="btn btn-secondary mt-3">ยกเลิกออเดอร์</a>
+        <a href="/Cart/Index" class="btn btn-outline-primary mt-3">⬅️ กลับไปเลือกสินค้า</a>
 
-    <a href="/Cart/ClearCart">ล้างตะกร้า</a>
+    </div>
 }
-<br />
-<br />
-<a href="/Cart/Index">⬅️ กลับไปเลือกสินค้า</a>
+
 
 

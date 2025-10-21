@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MvcIdentityApp.Data;
 using MvcIdentityApp.Models;
 using System.Diagnostics;
 
@@ -10,16 +11,21 @@ namespace MvcIdentityApp.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _db;
 
         public AccountController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        RoleManager<IdentityRole> roleManager)
+        RoleManager<IdentityRole> roleManager,
+        ApplicationDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _db = db;
         }
+
+        
 
         // 🟩 REGISTER
         [HttpGet]
@@ -65,11 +71,20 @@ namespace MvcIdentityApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
+
             if (username != null && password != null)
             {
                 var result = await _signInManager.PasswordSignInAsync(username, password, false, false);
                 if (result.Succeeded)
                 {
+                    var fullname_user = _db.Users.FirstOrDefault(u => u.UserName == username);
+                    Debug.WriteLine("====================================== Fullname : " + fullname_user.FullName);
+
+                    
+                    HttpContext.Session.SetString("Fullname", fullname_user.FullName);
+                    HttpContext.Session.SetString("Email", fullname_user.Email);
+                    HttpContext.Session.SetString("Phone", fullname_user.PhoneNumber);
+
                     HttpContext.Session.SetString("UserName", username);
                     return RedirectToAction("Index", "Cart");
                 }

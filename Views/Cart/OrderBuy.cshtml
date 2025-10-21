@@ -1,0 +1,22 @@
+﻿@model  IEnumerable<CartItem>
+@{
+    ViewData["Title"] = "OrderBuy";
+}
+
+<h1>OrderBuy</h1>
+@foreach (var item in Model)
+{
+    @if (item == null)
+    {
+        <div>
+            <h5>ไม่พบสินค้า</h5>
+        </div>
+    }
+    else
+    {
+        <p>@ViewBag.Fullname</p>
+        <p>@ViewBag.Email</p>
+    }
+}
+
+
