@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MvcIdentityApp.Data;
 using MvcIdentityApp.Models;
@@ -148,6 +149,37 @@ namespace MvcIdentityApp.Controllers
             ViewBag.Fullname = fullname;
             ViewBag.Email = email;
             ViewBag.Phone = phone;
+
+            var cart = GetCart();
+            return View(cart);
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(string fullname, string email, string phone, string address) 
+        {
+            fullname = HttpContext.Session.GetString("Fullname");
+
+            HttpContext.Session.SetString("Email", email);
+            email = HttpContext.Session.GetString("Email");
+
+            HttpContext.Session.SetString("Phone", phone);
+            phone = HttpContext.Session.GetString("Phone");
+
+            HttpContext.Session.SetString("Address", address);
+            address = HttpContext.Session.GetString("Address");
+
+            var username = HttpContext.Session.GetString("UserName");
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
+            ViewBag.Username = username;
+            ViewBag.Fullname = fullname;
+            ViewBag.Email = email;
+            ViewBag.Phone = phone;
+            ViewBag.Address = address;
 
             var cart = GetCart();
             return View(cart);

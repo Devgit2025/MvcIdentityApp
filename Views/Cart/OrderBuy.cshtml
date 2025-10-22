@@ -3,7 +3,7 @@
     ViewData["Title"] = "OrderBuy";
 }
 
-<h1>OrderBuy</h1>
+<h1>ยืนยันการสั่งซื้อ</h1>
 @foreach (var item in Model)
 {
     @if (item == null)
@@ -12,11 +12,17 @@
             <h5>ไม่พบสินค้า</h5>
         </div>
     }
-    else
-    {
-        <p>@ViewBag.Fullname</p>
-        <p>@ViewBag.Email</p>
-    }
 }
+<form asp-action="Checkout" method="post">
+    <label>ชื่อผู้ใช้</label>
+    <input name="fullname" type="text" placeholder="@ViewBag.Fullname" class="form-control" readonly />
+    <label>อีเมล์</label>
+    <input name="email" type="text" value="@ViewBag.Email"  class="form-control" required/>
+    <label>ที่อยู่</label>
+    <textarea name="address" rows="4" cols="50" placeholder="ที่อยู่" class="form-control" required></textarea>
+    <label>เบอร์โทรศัพท์</label>
+    <input name="phone" type="text" value="@ViewBag.Phone" placeholder="" class="form-control" required/>
 
+    <button type="submit" class="btn btn-success mt-2">ยืนยันการสั่งซื้อ</button>
+</form>
 

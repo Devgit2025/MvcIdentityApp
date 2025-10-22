@@ -28,5 +28,8 @@ namespace MvcIdentityApp.Models
         [DisplayName("จำนวนสินค้า")]
         [Range(0, 1000, ErrorMessage = "กรุณาป้อนสินค้าในคลัง 0-1000")]
         public int Pro_Stock { get; set; }
+
+        // 1 Category มีได้หลาย OrderDetail
+        //public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

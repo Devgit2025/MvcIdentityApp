@@ -11,6 +11,10 @@ namespace MvcIdentityApp.Models
         public required string FullName { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        // 1 Category มีได้หลาย Product
+        //public ICollection<OrderCustomer> OrderCustomers { get; set; }
+
+
 
         /*[Required(ErrorMessage = "กรุณาป้อนชื่อเต็ม")]
         [DisplayName("Fullname")]

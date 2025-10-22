@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MvcIdentityApp.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class addAllDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,6 +50,42 @@ namespace MvcIdentityApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderCustomers",
+                columns: table => new
+                {
+                    Order_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Order_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Order_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Order_email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Order_tel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Order_address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Order_total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ApplicationUse_id = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderCustomers", x => x.Order_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDetails",
+                columns: table => new
+                {
+                    Order_id_detail = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Pro_id = table.Column<int>(type: "int", nullable: false),
+                    Pro_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Pro_price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDetails", x => x.Order_id_detail);
                 });
 
             migrationBuilder.CreateTable(
@@ -232,6 +268,12 @@ namespace MvcIdentityApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "OrderCustomers");
+
+            migrationBuilder.DropTable(
+                name: "OrderDetails");
 
             migrationBuilder.DropTable(
                 name: "Products");

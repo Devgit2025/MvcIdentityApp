@@ -36,7 +36,7 @@ namespace MvcIdentityApp.Controllers
         {
             //var user = new ApplicationUser { UserName = username, Email = email, FullName = fullName };
             //Debug.WriteLine("Username = "+user.UserName+" Email = "+user.Email+" Fullname = "+user.FullName);
-            Debug.WriteLine("Password = "+password);
+            //Debug.WriteLine("Password = "+password);
             var user = new ApplicationUser
             {
                 FullName = fullName,

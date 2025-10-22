@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CartItem>
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h1>Checkout</h1>
+
+<table class="table table-bordered border-primary">
+    <tr>
+        <th>รายการสั่งซื้อ</th>
+        <th>จำนวนชิ้น</th>
+        <th>ราคารวม(บาท)</th>
+
+    </tr>
+    
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Cart_Name</td>
+            <td>@item.Cart_Quantity</td>
+            <td>@item.Cart_Total</td>
+            
+        </tr>
+
+    }
+
+    <tr>
+        <td colspan="3">
+            <p>ชื่อลูกค้า : @ViewBag.Fullname</p>
+            <p>อีเมล์ : @ViewBag.Email</p>
+            <p>เบอร์โทรศัพท์ : @ViewBag.Phone</p>
+            <p>ที่อยู่ : @ViewBag.Address</p>
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <h5 style="margin-top:10px" class="text-end">
+                <strong>ยอดรวมทั้งหมด:</strong>
+                @Model.Sum(i => i.Cart_Total).ToString("N2") บาท
+            </h5>
+        </td>
+    </tr>
+    
+</table>
+<div class="text-end">
+    <a class="btn btn-success">คิดเงิน</a>
+
+</div>
+

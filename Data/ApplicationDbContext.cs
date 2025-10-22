@@ -14,7 +14,10 @@ namespace MvcIdentityApp.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<OrderCustomer> OrderCustomers { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
-        
+
+
     }
 }

@@ -227,6 +227,74 @@ namespace MvcIdentityApp.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("MvcIdentityApp.Models.OrderCustomer", b =>
+                {
+                    b.Property<int>("Order_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Order_id"));
+
+                    b.Property<string>("ApplicationUse_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Order_address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Order_date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Order_email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Order_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Order_tel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Order_total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Order_id");
+
+                    b.ToTable("OrderCustomers");
+                });
+
+            modelBuilder.Entity("MvcIdentityApp.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("Order_id_detail")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Order_id_detail"));
+
+                    b.Property<int>("Pro_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Pro_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Pro_price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Order_id_detail");
+
+                    b.ToTable("OrderDetails");
+                });
+
             modelBuilder.Entity("MvcIdentityApp.Models.Product", b =>
                 {
                     b.Property<int>("Pro_Id")
