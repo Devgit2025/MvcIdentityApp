@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MvcIdentityApp.Data;
 using MvcIdentityApp.Models;
 using Newtonsoft.Json;
 using System.Diagnostics; // ต้องใช้ NuGet: Microsoft.AspNetCore.Session + Newtonsoft.Json
 using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace MvcIdentityApp.Controllers
@@ -15,22 +17,14 @@ namespace MvcIdentityApp.Controllers
 
         private readonly ApplicationDbContext _db;
 
+        public object Session { get; private set; }
+
         public CartController(ApplicationDbContext db)
         {
             _db = db; // ✅ inject จาก DI container
         }
+
         
-
-        //private readonly ApplicationDbContext db = new ApplicationDbContext();
-
-
-        // 🔹 จำลองสินค้า (ในโปรเจกต์จริงจะดึงจากฐานข้อมูล)
-        /*private List<Product> products = new List<Product>()
-        {
-        new Product{ Pro_Id = 1, Pro_Name = "เสื้อยืด", Pro_Price = 250 },
-        new Product{ Pro_Id = 2, Pro_Name = "กางเกงยีนส์", Pro_Price = 750 },
-        new Product{ Pro_Id = 3, Pro_Name = "รองเท้า", Pro_Price = 1200 }
-        };*/
 
         // แสดงสินค้าทั้งหมด
         public IActionResult Index()
@@ -155,6 +149,8 @@ namespace MvcIdentityApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Checkout(string fullname, string email, string phone, string address) 
         {
             fullname = HttpContext.Session.GetString("Fullname");
@@ -185,5 +181,100 @@ namespace MvcIdentityApp.Controllers
             return View(cart);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Calculator(decimal total_price, int[] pro_id, string[] pro_name,decimal[] pro_price, int[] quantity, decimal[] total)
+        {
+            var username = HttpContext.Session.GetString("UserName");
+            /*if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Account");
+
+            }*/
+            // ✅ รับค่าจาก hidden และ textbox ได้ตรงๆ
+            Debug.WriteLine("----------------------Total : "+total_price);   // 123
+
+            HttpContext.Session.Remove("Cart");
+
+            //get db from ApplicationUser
+            // ✅ ดึงข้อมูลจาก DB โดยมีเงื่อนไข username
+            Debug.WriteLine("----------------------- Username : "+ username);
+
+            var user = _db.Users.FirstOrDefault(u => u.UserName == username);
+
+            if (user == null)
+            {
+                Debug.WriteLine("----------------------- User Null");
+
+                //return NotFoundResult();
+            }
+            Debug.WriteLine("----------------------- User ID : " +user.Id);
+
+            //insert to db
+            // 1️⃣ สร้างออเดอร์ใหม่
+            var order_customer = new OrderCustomer
+            {
+                Order_date = DateTime.Now,
+                Order_name = HttpContext.Session.GetString("Fullname"),
+                Order_email = HttpContext.Session.GetString("Email"),
+                Order_tel = HttpContext.Session.GetString("Phone"),
+                Order_address = HttpContext.Session.GetString("Address"),
+                Order_total = total_price,
+                ApplicationUse_id = user.Id
+                
+            };
+
+            // 2️⃣ บันทึกลงฐานข้อมูลก่อน เพื่อให้ได้ OrderId
+            //_db.OrderCustomers.Add(order_customer);
+            //await _db.SaveChangesAsync();
+            
+
+            // ตอนนี้ order.OrderId มีค่าแล้ว
+
+            // 3️⃣ ใช้ OrderId ใส่ใน OrderDetail
+            for (int i=0;i<pro_id.Length;i++)
+            {
+                Debug.WriteLine("----------------------- Pro_id : " + pro_id[i]);
+                var order_dedtail = new OrderDetail
+                {
+                    Order_id_detail = order_customer.Order_id,   // ใช้ id ที่เพิ่งได้มา
+                    Pro_id = pro_id[i],
+                    Pro_name = pro_name[i],
+                    Pro_price = pro_price[i],
+                    Quantity = quantity[i],
+                    Total = total[i]
+
+                };
+
+            }
+            /*foreach (var order_detail in pro_id)
+            {
+                var order_dedtail = new OrderDetail
+                {
+                    Order_id_detail = order_customer.Order_id,   // ใช้ id ที่เพิ่งได้มา
+                    Pro_id = 1
+
+                };
+            }*/
+
+
+
+            return RedirectToAction("Index", "Cart");
+        }
+
+        private IActionResult NotFoundResult()
+        {
+            throw new NotImplementedException();
+        }
+
+        private IActionResult HttpNotFound()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult Orderdetail()
+        {
+            return View();
+        }
     }
 }

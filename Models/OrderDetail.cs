@@ -15,6 +15,7 @@ namespace MvcIdentityApp.Models
         */
         
         // Foreign Key
+        public int Order_id {get; set; }
         public int Pro_id { get; set; }
         public string Pro_name { get; set; }
         public decimal Pro_price { get; set; }
