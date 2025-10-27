@@ -86,6 +86,7 @@ namespace MvcIdentityApp.Controllers
                     HttpContext.Session.SetString("Phone", fullname_user.PhoneNumber);
 
                     HttpContext.Session.SetString("UserName", username);
+                    HttpContext.Session.SetString("User_Id", fullname_user.Id);
                     return RedirectToAction("Index", "Cart");
                 }
             }

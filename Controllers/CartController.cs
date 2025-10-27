@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using MvcIdentityApp.Data;
 using MvcIdentityApp.Models;
 using Newtonsoft.Json;
 using System.Diagnostics; // ต้องใช้ NuGet: Microsoft.AspNetCore.Session + Newtonsoft.Json
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 
@@ -252,37 +254,47 @@ namespace MvcIdentityApp.Controllers
                 // 4️⃣ บันทึกข้อมูลลงฐานข้อมูลอีกครั้ง
                 await _db.SaveChangesAsync();
             }
-            //await _db.SaveChangesAsync();
             return Ok("บันทึกข้อมูลสำเร็จ");
-
-            /*foreach (var order_detail in pro_id)
-            {
-                var order_dedtail = new OrderDetail
-                {
-                    Order_id_detail = order_customer.Order_id,   // ใช้ id ที่เพิ่งได้มา
-                    Pro_id = 1
-
-                };
-            }*/
-
-
-
-            //return RedirectToAction("Index", "Cart");
-        }
-
-        private IActionResult NotFoundResult()
-        {
-            throw new NotImplementedException();
-        }
-
-        private IActionResult HttpNotFound()
-        {
-            throw new NotImplementedException();
+            
         }
 
         public IActionResult Orderdetail()
         {
-            return View();
+            var username = HttpContext.Session.GetString("UserName");
+            ViewBag.Username = username;
+
+            var user_id = HttpContext.Session.GetString("User_Id");
+            Debug.WriteLine("--------------------- User ID  : " + user_id);
+
+            var order_customer = _db.OrderCustomers.Where(c => c.ApplicationUse_id == user_id).ToList();
+
+            if (order_customer == null) 
+            {
+                return View();
+            }
+            return View(order_customer);
+        }
+
+        public IActionResult Detail(int id)
+        {
+            var username = HttpContext.Session.GetString("UserName");
+            ViewBag.Username = username;
+
+            var fullname = HttpContext.Session.GetString("Fullname");
+            var email = HttpContext.Session.GetString("Email");
+            var phone = HttpContext.Session.GetString("Phone");
+            var address = HttpContext.Session.GetString("Address");
+            ViewBag.Fullname = fullname;
+            ViewBag.Email = email;
+            ViewBag.Phone = phone;
+            ViewBag.Address = address;
+
+            //var order_detail = _db.OrderDetails.FirstOrDefault(d => d.Order_id == id);
+            var order_detail = _db.OrderDetails.Where(d => d.Order_id == id).ToList();
+            
+            //Debug.WriteLine("------------------ Proname : "+ order_detail.Pro_name);
+
+            return View(order_detail);
         }
     }
 }

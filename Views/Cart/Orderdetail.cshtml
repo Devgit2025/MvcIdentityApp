@@ -1,0 +1,32 @@
+﻿@model IEnumerable<OrderCustomer>
+@{
+    ViewData["Title"] = "Orderdetail";
+}
+
+<h1>Orderdetail</h1>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>ลำดับ</th>
+        <th>ชื่อผู้ซื้อ</th>
+        <th>วันที่ซื้อ</th>
+        <th>ราคารวม</th>
+        <th></th>
+    </tr>
+    @{
+        int i = 1;
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@i</td>
+            <td>@item.Order_name</td>
+            <td>@item.Order_date</td>
+            <td>@item.Order_total.ToString("N2")</td>
+            <td><a href="/Cart/Detail/@item.Order_id" class="btn btn-primary">ดูรายละเอียด</a></td>
+        </tr>
+        i++;
+    }
+</table>
+
+
+

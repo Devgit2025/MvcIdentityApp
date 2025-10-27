@@ -1,0 +1,61 @@
+﻿@model IEnumerable<OrderDetail>
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+@{
+    decimal total_price = 0;
+    int i = 1;
+}
+
+
+<table class="table table-bordered border-primary">
+    <tr>
+        <th>ลำดับ</th>
+        <th>รายการสั่งซื้อ</th>
+        <th>ราคาต่อชิ้น</th>
+        <th>จำนวนชิ้น</th>
+        <th>ราคารวม(บาท)</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        total_price += item.Total;
+
+        <tr>
+            <td>@i</td>
+            <td>@item.Pro_name</td>
+            <td>@item.Pro_price</td>
+            <td>@item.Quantity</td>
+            <td>@item.Total</td>
+        </tr>
+        i++;
+    }
+    
+
+    <tr>
+        <td colspan="5">
+            <p>ชื่อลูกค้า : @ViewBag.Fullname</p>
+            <p>อีเมล์ : @ViewBag.Email</p>
+            <p>เบอร์โทรศัพท์ : @ViewBag.Phone</p>
+            <p>ที่อยู่ : @ViewBag.Address</p>
+
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="5">
+            <h5 style="margin-top:10px" class="text-end">
+                <strong>ยอดรวมทั้งหมด: @total_price</strong>
+            </h5>
+        </td>
+    </tr>
+
+</table>
+
+
+
+
+
+
