@@ -225,8 +225,8 @@ namespace MvcIdentityApp.Controllers
             };
 
             // 2️⃣ บันทึกลงฐานข้อมูลก่อน เพื่อให้ได้ OrderId
-            //_db.OrderCustomers.Add(order_customer);
-            //await _db.SaveChangesAsync();
+            _db.OrderCustomers.Add(order_customer);
+            await _db.SaveChangesAsync();
             
 
             // ตอนนี้ order.OrderId มีค่าแล้ว
@@ -235,9 +235,11 @@ namespace MvcIdentityApp.Controllers
             for (int i=0;i<pro_id.Length;i++)
             {
                 Debug.WriteLine("----------------------- Pro_id : " + pro_id[i]);
+                Debug.WriteLine("======================= Order_id : " + order_customer.Order_id);
+                Debug.WriteLine("Pro id lenght : " + i.ToString());
                 var order_dedtail = new OrderDetail
                 {
-                    Order_id_detail = order_customer.Order_id,   // ใช้ id ที่เพิ่งได้มา
+                    Order_id = order_customer.Order_id,   // ใช้ id ที่เพิ่งได้มา
                     Pro_id = pro_id[i],
                     Pro_name = pro_name[i],
                     Pro_price = pro_price[i],
@@ -245,8 +247,14 @@ namespace MvcIdentityApp.Controllers
                     Total = total[i]
 
                 };
+                _db.OrderDetails.Add(order_dedtail);
 
+                // 4️⃣ บันทึกข้อมูลลงฐานข้อมูลอีกครั้ง
+                await _db.SaveChangesAsync();
             }
+            //await _db.SaveChangesAsync();
+            return Ok("บันทึกข้อมูลสำเร็จ");
+
             /*foreach (var order_detail in pro_id)
             {
                 var order_dedtail = new OrderDetail
@@ -259,7 +267,7 @@ namespace MvcIdentityApp.Controllers
 
 
 
-            return RedirectToAction("Index", "Cart");
+            //return RedirectToAction("Index", "Cart");
         }
 
         private IActionResult NotFoundResult()
