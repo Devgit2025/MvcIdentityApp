@@ -254,8 +254,10 @@ namespace MvcIdentityApp.Controllers
                 // 4️⃣ บันทึกข้อมูลลงฐานข้อมูลอีกครั้ง
                 await _db.SaveChangesAsync();
             }
-            return Ok("บันทึกข้อมูลสำเร็จ");
-            
+            return RedirectToAction("Orderdetail", "Cart");
+
+            //return Ok("บันทึกข้อมูลสำเร็จ");
+
         }
 
         public IActionResult Orderdetail()
@@ -283,15 +285,18 @@ namespace MvcIdentityApp.Controllers
             var fullname = HttpContext.Session.GetString("Fullname");
             var email = HttpContext.Session.GetString("Email");
             var phone = HttpContext.Session.GetString("Phone");
-            var address = HttpContext.Session.GetString("Address");
+            //var address = HttpContext.Session.GetString("Address");
             ViewBag.Fullname = fullname;
             ViewBag.Email = email;
             ViewBag.Phone = phone;
-            ViewBag.Address = address;
 
             //var order_detail = _db.OrderDetails.FirstOrDefault(d => d.Order_id == id);
             var order_detail = _db.OrderDetails.Where(d => d.Order_id == id).ToList();
-            
+
+            var address = _db.OrderCustomers.FirstOrDefault(c => c.Order_id == id);
+            ViewBag.Address = address.Order_address;
+
+
             //Debug.WriteLine("------------------ Proname : "+ order_detail.Pro_name);
 
             return View(order_detail);

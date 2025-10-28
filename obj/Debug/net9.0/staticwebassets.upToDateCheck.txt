@@ -61,6 +61,7 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\images\chicken-rice-1508984_1280_25681028135303.jpg
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\css\site.css
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\favicon.ico
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\js\site.js

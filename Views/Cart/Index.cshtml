@@ -14,7 +14,9 @@
         {
             <div class="col-sm-6 col-md-3 mb-3">
                 <div class="card">
-                    <img src="https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_1280.jpg" class="card-img-top" height="200">
+                    
+                    <img src="@product.Pro_Img" alt="image" class="card-img-top" height="200" />
+
                     <div class="card-body">
                         <h5 class="card-title">@product.Pro_Name</h5>
                         <p class="card-subtitle text-muted">@product.Pro_Detail</p>
@@ -46,31 +48,4 @@
     
 </div>
 
-<h2>ยินดีต้อนรับ,@ViewBag.Username</h2>
-<a class="btn btn-danger" asp-controller="Account" asp-action="Logout">ออกจากระบบ</a>
-<br />
-
-<h2>รายการสินค้า</h2>
-
-<table border="1" cellpadding="8">
-    <tr>
-        <th>ชื่อสินค้า</th>
-        <th>ราคา</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Pro_Name</td>
-            <td>@item.Pro_Price.ToString("N2") บาท</td>
-            <td>
-                <a href="/Cart/AddToCart/@item.Pro_Id">เพิ่มลงตะกร้า</a>
-            </td>
-        </tr>
-    }
-</table>
-
-<br />
-<a href="/Cart/Cart">ไปหน้าตะกร้าสินค้า 🛒</a>
 

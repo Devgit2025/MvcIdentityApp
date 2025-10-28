@@ -121,5 +121,15 @@ namespace MvcIdentityApp.Controllers
 
         public IActionResult AccessDenied() => View();
 
+
+        public async Task<IActionResult> SetAdmin(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                await _userManager.AddToRoleAsync(user, "Admin"); // ✅ กำหนด Role ให้ user
+            }
+            return Content("User ได้เป็น Admin แล้ว");
+        }
     }
 }

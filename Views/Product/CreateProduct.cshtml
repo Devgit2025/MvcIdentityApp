@@ -4,7 +4,7 @@
 }
 
 <h1>CreateProduct</h1>
-<form method="post" asp-controller="Product" asp-action="Createproduct">
+<form method="post" asp-controller="Product" asp-action="Createproduct" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Pro_Name"></label>
         <input type="text" asp-for="Pro_Name" class="form-control" />
@@ -21,9 +21,8 @@
         <span asp-validation-for="Pro_Price" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Pro_Img"></label>
-        <input type="file" asp-for="Pro_Img" class="form-control" />
-        <span asp-validation-for="Pro_Img" class="text-danger"></span>
+        <label>เลือกรูปภาพ</label>
+        <input type="file" name="ImageFile" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="Pro_Stock"></label>

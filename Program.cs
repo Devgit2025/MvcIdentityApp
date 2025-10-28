@@ -31,10 +31,13 @@ builder.Services.AddSession(options =>
 });
 
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -59,12 +62,6 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 
-app.Run();
-async Task CreateRolesAsync(IApplicationBuilder app)
-{
-    using var scope = app.ApplicationServices.CreateScope();
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    if (!await roleManager.RoleExistsAsync("Admin"))
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
-}
+app.Run();
+
