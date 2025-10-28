@@ -1,7 +1,36 @@
-﻿
+﻿@model IEnumerable<Product>
 @{
     ViewData["Title"] = "EditProduct";
 }
 
 <h1>EditProduct</h1>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>รูป</th>
+        <th>รหัสสินค้า</th>
+        <th>ชื่อสินค้า</th>
+        <th>ราคาสินค้า</th>
+        <th></th>
+        <th></th>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@item.Pro_Img" alt="image" height="50" />
+            </td>
+            <td>@item.Pro_Id</td>
+            <td>@item.Pro_Name</td>
+            <td>@item.Pro_Price.ToString("N2")</td>
+            <td><a href="/Product/Edit/@item.Pro_Id" class="btn btn-warning">แก้ไข</a></td>
+            <td><a href="/Product/Remove/@item.Pro_Id" class="btn btn-danger" onclick="return confirm('คุณต้องการลบ @item.Pro_Name หรือไม่')">ลบ</a></td>
+
+        </tr>
+    }
+</table>
+
+    
+
 

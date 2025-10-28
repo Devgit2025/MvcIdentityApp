@@ -1,0 +1,40 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<form method="post" asp-controller="Product" asp-action="Edit" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Pro_Id"></label>
+        <input type="text" asp-for="Pro_Id" class="form-control" readonly/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Pro_Name"></label>
+        <input type="text" asp-for="Pro_Name" class="form-control" />
+        <span asp-validation-for="Pro_Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Pro_Detail"></label>
+        <input type="text" asp-for="Pro_Detail" class="form-control" />
+        <span asp-validation-for="Pro_Detail" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Pro_Price"></label>
+        <input type="number" asp-for="Pro_Price" class="form-control" />
+        <span asp-validation-for="Pro_Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>เลือกรูปภาพ</label>
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Pro_Stock"></label>
+        <input type="number" asp-for="Pro_Stock" class="form-control" />
+        <span asp-validation-for="Pro_Stock" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary my-2">บันทึก</button>
+</form>
+
+

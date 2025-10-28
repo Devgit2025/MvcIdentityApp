@@ -42,6 +42,11 @@ namespace MvcIdentityApp.Controllers
             // ดึงข้อมูลผู้ใช้ทั้งหมด
             //var users = _context.Users.ToList();  // ✅ จาก IdentityDbContext
             var products = _db.Products.ToList();
+            if (username == "admin")
+            {
+                return View(products);
+            }
+            
             return View(products);
         }
 

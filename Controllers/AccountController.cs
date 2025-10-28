@@ -42,7 +42,8 @@ namespace MvcIdentityApp.Controllers
                 FullName = fullName,
                 UserName = username,
                 Email = email,
-                PhoneNumber = phonenumber
+                PhoneNumber = phonenumber,
+                CreatedAt = DateTime.Now
             };
 
             var result = await _userManager.CreateAsync(user, password);
@@ -119,17 +120,9 @@ namespace MvcIdentityApp.Controllers
             return RedirectToAction("Login");
         }
 
-        public IActionResult AccessDenied() => View();
+        public IActionResult AccessDenied() => Content("⛔ คุณไม่มีสิทธิ์เข้าถึงหน้านี้");
 
 
-        public async Task<IActionResult> SetAdmin(string email)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user != null)
-            {
-                await _userManager.AddToRoleAsync(user, "Admin"); // ✅ กำหนด Role ให้ user
-            }
-            return Content("User ได้เป็น Admin แล้ว");
-        }
+
     }
 }

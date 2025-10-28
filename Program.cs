@@ -15,6 +15,26 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+// ✅ เพิ่ม Identity
+/*builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+    options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();*/
+
+/*builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddRoles<IdentityRole>() // ✅ เปิดใช้ Role
+.AddEntityFrameworkStores<ApplicationDbContext>();*/
+
+/*builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>();*/
+
+
 // 🔹 ตั้งค่า Cookie
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -60,6 +80,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Cart}/{action=Index}/{id?}")
     .WithStaticAssets();
+
 
 
 
