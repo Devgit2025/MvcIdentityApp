@@ -1,9 +1,5 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
-wwwroot\images\apple_25681028143733.jpg
-wwwroot\images\banana_25681028190551.jpg
-wwwroot\images\chicken-rice-1508984_1280_25681028135303.jpg
-wwwroot\images\chicken-rice-1508984_1280_25681028155442.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -65,6 +61,13 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\images\chicken-rice-1508984_1280_25681028135303.jpg
+wwwroot\images\apple_25681028143733.jpg
+wwwroot\images\chicken-rice-1508984_1280_25681028155442.jpg
+wwwroot\images\banana_25681028190551.jpg
+wwwroot\images\kfc_25681028190717.jpg
+wwwroot\images\chicken-rice-1508984_1280_25681028190759.jpg
+wwwroot\images\dog_25681028191400.jpg
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\css\site.css
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\favicon.ico
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\js\site.js

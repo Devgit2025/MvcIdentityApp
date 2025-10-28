@@ -25,8 +25,9 @@ namespace MvcIdentityApp.Controllers
         }
 
         public IActionResult CreateProduct() 
-        { 
-            
+        {
+            var username = HttpContext.Session.GetString("UserName");
+            ViewBag.Username = username;
             return View();
         }
 
@@ -35,7 +36,8 @@ namespace MvcIdentityApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateProduct(Product productmodel, IFormFile ImageFile)
         {
-            
+            //var username = HttpContext.Session.GetString("UserName");
+            //ViewBag.Username = username;
             //if (ModelState.IsValid)
             //{
                 //  อัพโหลดภาพ
@@ -75,7 +77,7 @@ namespace MvcIdentityApp.Controllers
                 Debug.WriteLine("Error create product -------------------------------" + errors.ToString());
                 _db.SaveChanges();
                 
-                return RedirectToAction("Index","Cart");
+                return RedirectToAction("EditProduct","Product");
             //}
             //return View();
         }
@@ -147,7 +149,7 @@ namespace MvcIdentityApp.Controllers
 
             _db.Update(productmodel);
             await _db.SaveChangesAsync();
-            TempData["SuccessMessage"] = "อัพเดตเรียบร้อย";
+            //TempData["SuccessMessage"] = "อัพเดตเรียบร้อย";
 
             return RedirectToAction("EditProduct", "Product");
         }
