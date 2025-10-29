@@ -68,6 +68,8 @@ wwwroot\images\banana_25681028190551.jpg
 wwwroot\images\kfc_25681028190717.jpg
 wwwroot\images\chicken-rice-1508984_1280_25681028190759.jpg
 wwwroot\images\dog_25681028191400.jpg
+wwwroot\images\kfc_25681028192521.jpg
+wwwroot\images\chicken-rice-1508984_1280_25681028192623.jpg
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\css\site.css
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\favicon.ico
 D:\MvcIdentityApp_projnect\MvcIdentityApp\MvcIdentityApp\wwwroot\js\site.js

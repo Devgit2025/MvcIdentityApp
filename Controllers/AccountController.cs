@@ -88,6 +88,12 @@ namespace MvcIdentityApp.Controllers
 
                     HttpContext.Session.SetString("UserName", username);
                     HttpContext.Session.SetString("User_Id", fullname_user.Id);
+
+                    if (username == "admin")
+                    {
+                        return RedirectToAction("EditProduct", "Product");
+
+                    }
                     return RedirectToAction("Index", "Cart");
                 }
             }
